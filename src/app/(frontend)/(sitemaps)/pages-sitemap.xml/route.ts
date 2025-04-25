@@ -7,7 +7,7 @@ const getPagesSitemap = unstable_cache(
   async () => {
     const payload = await getPayload({ config });
     const SITE_URL =
-      process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.NEXT_PUBLIC_SERVER_URL || //
       process.env.VERCEL_PROJECT_PRODUCTION_URL ||
       "https://example.com";
 
@@ -47,10 +47,7 @@ const getPagesSitemap = unstable_cache(
           .filter(page => Boolean(page?.slug))
           .map(page => {
             return {
-              loc:
-                page?.slug === "home"
-                  ? `${SITE_URL}/`
-                  : `${SITE_URL}/${page?.slug}`,
+              loc: page?.slug === "home" ? `${SITE_URL}/` : `${SITE_URL}/${page?.slug}`,
               lastmod: page.updatedAt || dateFallback,
             };
           })

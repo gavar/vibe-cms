@@ -11,10 +11,7 @@ interface Props {
 }
 
 /* This component helps us with SSR based dynamic redirects */
-export const PayloadRedirects: React.FC<Props> = async ({
-  disableNotFound,
-  url,
-}) => {
+export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }) => {
   const redirects = await getCachedRedirects()();
 
   const redirectItem = redirects.find(redirect => redirect.from === url);
@@ -30,17 +27,13 @@ export const PayloadRedirects: React.FC<Props> = async ({
       const collection = redirectItem.to?.reference?.relationTo;
       const id = redirectItem.to?.reference?.value;
 
-      const document = (await getCachedDocument(collection, id)()) as
-        | Page
-        | Post;
+      const document = (await getCachedDocument(collection, id)()) as Page | Post;
       redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
         document?.slug
       }`;
     } else {
       redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
-        typeof redirectItem.to?.reference?.value === "object"
-          ? redirectItem.to?.reference?.value?.slug
-          : ""
+        typeof redirectItem.to?.reference?.value === "object" ? redirectItem.to?.reference?.value?.slug : ""
       }`;
     }
 

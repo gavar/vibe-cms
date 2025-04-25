@@ -1,9 +1,6 @@
 "use client";
 
-import type {
-  PayloadAdminBarProps,
-  PayloadMeUser,
-} from "@payloadcms/admin-bar";
+import type { PayloadAdminBarProps, PayloadMeUser } from "@payloadcms/admin-bar";
 
 import { cn } from "@/utilities/ui";
 import { PayloadAdminBar } from "@payloadcms/admin-bar";
@@ -40,9 +37,7 @@ export const AdminBar: React.FC<{
   const segments = useSelectedLayoutSegments();
   const [show, setShow] = useState(false);
   const collection = (
-    collectionLabels[segments?.[1] as keyof typeof collectionLabels]
-      ? segments[1]
-      : "pages"
+    collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : "pages"
   ) as keyof typeof collectionLabels;
   const router = useRouter();
 

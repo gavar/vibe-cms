@@ -20,16 +20,7 @@ export const Select: React.FC<
     control: Control;
     errors: Partial<FieldErrorsImpl>;
   }
-> = ({
-  name,
-  control,
-  errors,
-  label,
-  options,
-  required,
-  width,
-  defaultValue,
-}) => {
+> = ({ name, control, errors, label, options, required, width, defaultValue }) => {
   return (
     <Width width={width}>
       <Label htmlFor={name}>
@@ -48,9 +39,7 @@ export const Select: React.FC<
           const controlledValue = options.find(t => t.value === value);
 
           return (
-            <SelectComponent
-              onValueChange={val => onChange(val)}
-              value={controlledValue?.value}>
+            <SelectComponent onValueChange={val => onChange(val)} value={controlledValue?.value}>
               <SelectTrigger className="w-full" id={name}>
                 <SelectValue placeholder={label} />
               </SelectTrigger>

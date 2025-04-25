@@ -58,8 +58,6 @@ wwwroot/
 
 # exclude files
 .editorconfig
-.env
-.env.*
 .gitignore
 .npmrc
 LICENSE

@@ -29,21 +29,6 @@ overrides:
       parser: xml
       xmlWhitespaceSensitivity: ignore
 
-  # .NET
-  - files:
-      - "*.DotSettings"
-      - "*.csproj"
-      - "*.mergesettings"
-      - "*.props"
-      - "*.resx"
-      - "*.ruleset"
-      - "*.targets"
-      - "nlog.config"
-      - "nuget.config"
-    options:
-      parser: xml
-      xmlWhitespaceSensitivity: ignore
-
   # Properties
   - files:
       - ".env"

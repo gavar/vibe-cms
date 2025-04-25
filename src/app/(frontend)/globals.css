@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../../tailwind.config.js';
 
@@ -107,7 +107,7 @@
     @apply border-border;
   }
   body {
-    @apply flex min-h-[100vh] flex-col bg-background text-foreground;
+    @apply bg-background text-foreground flex min-h-[100vh] flex-col;
   }
 }
 

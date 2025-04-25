@@ -24,9 +24,7 @@ import { cn } from "@/utilities/ui";
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<
-      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps
-    >;
+  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>;
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!;
@@ -37,15 +35,11 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   return relationTo === "posts" ? `/posts/${slug}` : `/${slug}`;
 };
 
-const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
-  defaultConverters,
-}) => ({
+const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
-    banner: ({ node }) => (
-      <BannerBlock className="col-start-2 mb-4" {...node.fields} />
-    ),
+    banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-span-3 col-start-1"
@@ -77,7 +71,7 @@ export default function RichText(props: Props) {
         {
           "container": enableGutter,
           "max-w-none": !enableGutter,
-          "prose mx-auto md:prose-md dark:prose-invert": enableProse,
+          "prose md:prose-md dark:prose-invert mx-auto": enableProse,
         },
         className
       )}

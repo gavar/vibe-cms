@@ -8,20 +8,14 @@ import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { searchPlugin } from "@payloadcms/plugin-search";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
+import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { Plugin } from "payload";
 
 import { Page, Post } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title
-    ? `${doc.title} | Payload Website Template`
-    : "Payload Website Template";
+  return doc?.title ? `${doc.title} | Payload Website Template` : "Payload Website Template";
 };
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -41,8 +35,7 @@ export const plugins: Plugin[] = [
             return {
               ...field,
               admin: {
-                description:
-                  "You will need to rebuild the website when changing this field.",
+                description: "You will need to rebuild the website when changing this field.",
               },
             };
           }

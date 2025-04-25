@@ -4,10 +4,7 @@ import deepMerge from "@/utilities/deepMerge";
 
 export type LinkAppearances = "default" | "outline";
 
-export const appearanceOptions: Record<
-  LinkAppearances,
-  { label: string; value: string }
-> = {
+export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
     label: "Default",
     value: "default",
@@ -24,11 +21,7 @@ type LinkType = (options?: {
   overrides?: Partial<GroupField>;
 }) => Field;
 
-export const link: LinkType = ({
-  appearances,
-  disableLabel = false,
-  overrides = {},
-} = {}) => {
+export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
   const linkResult: GroupField = {
     name: "link",
     type: "group",
@@ -125,15 +118,10 @@ export const link: LinkType = ({
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = [
-      appearanceOptions.default,
-      appearanceOptions.outline,
-    ];
+    let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline];
 
     if (appearances) {
-      appearanceOptionsToUse = appearances.map(
-        appearance => appearanceOptions[appearance]
-      );
+      appearanceOptionsToUse = appearances.map(appearance => appearanceOptions[appearance]);
     }
 
     linkResult.fields.push({

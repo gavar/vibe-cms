@@ -1,9 +1,5 @@
 import type { CheckboxField } from "@payloadcms/plugin-form-builder/types";
-import type {
-  FieldErrorsImpl,
-  FieldValues,
-  UseFormRegister,
-} from "react-hook-form";
+import type { FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 
 import { useFormContext } from "react-hook-form";
 

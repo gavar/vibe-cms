@@ -1,10 +1,4 @@
-import type {
-  CollectionSlug,
-  File,
-  GlobalSlug,
-  Payload,
-  PayloadRequest,
-} from "payload";
+import type { CollectionSlug, File, GlobalSlug, Payload, PayloadRequest } from "payload";
 
 import { contactForm as contactFormData } from "./contact-form";
 import { contact as contactPageData } from "./contact-page";
@@ -16,28 +10,14 @@ import { post1 } from "./post-1";
 import { post2 } from "./post-2";
 import { post3 } from "./post-3";
 
-const collections: CollectionSlug[] = [
-  "categories",
-  "media",
-  "pages",
-  "posts",
-  "forms",
-  "form-submissions",
-  "search",
-];
+const collections: CollectionSlug[] = ["categories", "media", "pages", "posts", "forms", "form-submissions", "search"];
 const globals: GlobalSlug[] = ["header", "footer"];
 
 // Next.js revalidation errors are normal when seeding the database without a server running
 // i.e. running `yarn seed` locally instead of using the admin UI within an active app
 // The app is not running to revalidate the pages and so the API routes are not available
 // These error messages can be ignored: `Error hitting revalidate route for...`
-export const seed = async ({
-  payload,
-  req,
-}: {
-  payload: Payload;
-  req: PayloadRequest;
-}): Promise<void> => {
+export const seed = async ({ payload, req }: { payload: Payload; req: PayloadRequest }): Promise<void> => {
   payload.logger.info("Seeding database...");
 
   // we need to clear the media directory before seeding
@@ -62,20 +42,12 @@ export const seed = async ({
     )
   );
 
-  await Promise.all(
-    collections.map(collection =>
-      payload.db.deleteMany({ collection, req, where: {} })
-    )
-  );
+  await Promise.all(collections.map(collection => payload.db.deleteMany({ collection, req, where: {} })));
 
   await Promise.all(
     collections
-      .filter(collection =>
-        Boolean(payload.collections[collection].config.versions)
-      )
-      .map(collection =>
-        payload.db.deleteVersions({ collection, req, where: {} })
-      )
+      .filter(collection => Boolean(payload.collections[collection].config.versions))
+      .map(collection => payload.db.deleteVersions({ collection, req, where: {} }))
   );
 
   payload.logger.info(`— Seeding demo author and user...`);
@@ -92,130 +64,128 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding media...`);
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] =
-    await Promise.all([
-      fetchFileByURL(
-        "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp"
-      ),
-      fetchFileByURL(
-        "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp"
-      ),
-      fetchFileByURL(
-        "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp"
-      ),
-      fetchFileByURL(
-        "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp"
-      ),
-    ]);
+  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
+    fetchFileByURL(
+      "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp"
+    ),
+    fetchFileByURL(
+      "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp"
+    ),
+    fetchFileByURL(
+      "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp"
+    ),
+    fetchFileByURL(
+      "https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp"
+    ),
+  ]);
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] =
-    await Promise.all([
-      payload.create({
-        collection: "users",
-        data: {
-          name: "Demo Author",
-          email: "demo-author@example.com",
-          password: "password",
-        },
-      }),
-      payload.create({
-        collection: "media",
-        data: image1,
-        file: image1Buffer,
-      }),
-      payload.create({
-        collection: "media",
-        data: image2,
-        file: image2Buffer,
-      }),
-      payload.create({
-        collection: "media",
-        data: image2,
-        file: image3Buffer,
-      }),
-      payload.create({
-        collection: "media",
-        data: imageHero1,
-        file: hero1Buffer,
-      }),
+  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
+    payload.create({
+      collection: "users",
+      data: {
+        name: "Demo Author",
+        email: "demo-author@example.com",
+        password: "password",
+      },
+    }),
+    payload.create({
+      collection: "media",
+      data: image1,
+      file: image1Buffer,
+    }),
+    payload.create({
+      collection: "media",
+      data: image2,
+      file: image2Buffer,
+    }),
+    payload.create({
+      collection: "media",
+      data: image2,
+      file: image3Buffer,
+    }),
+    payload.create({
+      collection: "media",
+      data: imageHero1,
+      file: hero1Buffer,
+    }),
 
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "Technology",
-          breadcrumbs: [
-            {
-              label: "Technology",
-              url: "/technology",
-            },
-          ],
-        },
-      }),
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "Technology",
+        breadcrumbs: [
+          {
+            label: "Technology",
+            url: "/technology",
+          },
+        ],
+      },
+    }),
 
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "News",
-          breadcrumbs: [
-            {
-              label: "News",
-              url: "/news",
-            },
-          ],
-        },
-      }),
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "News",
+        breadcrumbs: [
+          {
+            label: "News",
+            url: "/news",
+          },
+        ],
+      },
+    }),
 
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "Finance",
-          breadcrumbs: [
-            {
-              label: "Finance",
-              url: "/finance",
-            },
-          ],
-        },
-      }),
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "Design",
-          breadcrumbs: [
-            {
-              label: "Design",
-              url: "/design",
-            },
-          ],
-        },
-      }),
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "Finance",
+        breadcrumbs: [
+          {
+            label: "Finance",
+            url: "/finance",
+          },
+        ],
+      },
+    }),
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "Design",
+        breadcrumbs: [
+          {
+            label: "Design",
+            url: "/design",
+          },
+        ],
+      },
+    }),
 
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "Software",
-          breadcrumbs: [
-            {
-              label: "Software",
-              url: "/software",
-            },
-          ],
-        },
-      }),
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "Software",
+        breadcrumbs: [
+          {
+            label: "Software",
+            url: "/software",
+          },
+        ],
+      },
+    }),
 
-      payload.create({
-        collection: "categories",
-        data: {
-          title: "Engineering",
-          breadcrumbs: [
-            {
-              label: "Engineering",
-              url: "/engineering",
-            },
-          ],
-        },
-      }),
-    ]);
+    payload.create({
+      collection: "categories",
+      data: {
+        title: "Engineering",
+        breadcrumbs: [
+          {
+            label: "Engineering",
+            url: "/engineering",
+          },
+        ],
+      },
+    }),
+  ]);
 
   payload.logger.info(`— Seeding posts...`);
 
