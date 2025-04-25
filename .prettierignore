@@ -1,14 +1,68 @@
-**/payload-types.ts
-.tmp
-**/.git
-**/.hg
-**/.pnp.*
-**/.svn
-**/.yarn/**
-**/build
-**/dist/**
-**/node_modules
-**/temp
-**/docs/**
-tsconfig.json
+# exclude everything
+*/*
 
+# include directories
+!.config/*
+!apps/*
+!iac/*
+!packages/*
+!src/*
+!test/*
+
+# exclude directories
+.idea
+.parcel-cache/
+bin/
+dist/
+obj/
+out/
+wwwroot/
+
+# exclude file types
+*.DotSettings.user
+*.bicep
+*.cs
+*.csv
+*.dockerfile
+*.g.*
+*.ico
+*.jpg
+*.map
+*.png
+*.razor
+*.sln
+*.sql
+*.txt
+*.webp
+
+# include files
+!.husky/*.json
+!nlog.config
+!nuget.config
+
+# include file types
+!*.DotSettings
+!*.csproj
+!*.css
+!*.js
+!*.mergesettings
+!*.props
+!*.resx
+!*.ruleset
+!*.scss
+!*.targets
+!*.ts
+!*.xml
+!*rc
+!.*rc
+
+# exclude files
+.editorconfig
+.env
+.env.*
+.gitignore
+.npmrc
+LICENSE
+
+# exclude comments
+\#*
