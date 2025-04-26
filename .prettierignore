@@ -60,6 +60,7 @@ wwwroot/
 .editorconfig
 .gitignore
 .npmrc
+.yarnrc
 LICENSE
 
 # exclude comments
